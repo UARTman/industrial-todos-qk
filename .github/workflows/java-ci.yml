@@ -29,6 +29,10 @@ jobs:
 
       - name: Build with Gradle Wrapper
         run: ./gradlew build
+        env:
+          SMALLRYE_JWT_SIGN_KEY: ${{ secrets.JWT_PRIVATE_KEY }}
+          SMALLRYE_JWT_VERIFY_KEY: ${{ secrets.JWT_PUBLIC_KEY }}
+          SMALLRYE_JWT_ENCRYPT_KEY: ${{ secrets.JWT_PUBLIC_KEY }}
 
     # NOTE: The Gradle Wrapper is the default and recommended way to run Gradle (https://docs.gradle.org/current/userguide/gradle_wrapper.html).
     # If your project does not have the Gradle Wrapper configured, you can use the following configuration to run Gradle with a specified version.
