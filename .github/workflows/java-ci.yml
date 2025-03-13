@@ -54,7 +54,7 @@ jobs:
       - name: Build with Gradle Wrapper
         run: ./gradlew build
         env:
-          QUARKUS_CONTAINER_IMAGE_REGISTRY: docker.io/uartman
+          QUARKUS_CONTAINER_IMAGE_GROUP: ${{ secrets.DOCKER_USERNAME }}
           QUARKUS_CONTAINER_IMAGE_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           QUARKUS_CONTAINER_IMAGE_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
           QUARKUS_CONTAINER_IMAGE_PUSH: true
