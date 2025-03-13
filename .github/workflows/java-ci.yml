@@ -34,16 +34,16 @@ jobs:
       - name: Show app version
         run: echo $PROJECT_VERSION
 
+      - name: Set quarkus image tag version
+        run: echo "QUARKUS_CONTAINER_IMAGE_TAG=$PROJECT_VERSION-${{ github.sha }}" >> $GITHUB_ENV
+
       - name: Show quarkus image tag
         run: echo $QUARKUS_CONTAINER_IMAGE_TAG
-        env:
-          QUARKUS_CONTAINER_IMAGE_TAG: $PROJECT_VERSION-${{ github.sha }}
 
 
       - name: Build with Gradle Wrapper
         run: ./gradlew build
         env:
-          QUARKUS_CONTAINER_IMAGE_TAG: $PROJECT_VERSION-${{ github.sha }}
           SMALLRYE_JWT_SIGN_KEY: ${{ secrets.JWT_PRIVATE_KEY }}
           SMALLRYE_JWT_VERIFY_KEY: ${{ secrets.JWT_PUBLIC_KEY }}
           MP_JWT_VERIFY_PUBLICKEY: ${{ secrets.JWT_PUBLIC_KEY }}
