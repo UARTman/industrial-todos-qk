@@ -54,6 +54,8 @@ jobs:
       - name: Build with Gradle Wrapper
         run: ./gradlew build
         env:
+          QUARKUS_CONTAINER_IMAGE_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          QUARKUS_CONTAINER_IMAGE_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
           QUARKUS_CONTAINER_IMAGE_PUSH: true
           SMALLRYE_JWT_SIGN_KEY: ${{ secrets.JWT_PRIVATE_KEY }}
           SMALLRYE_JWT_VERIFY_KEY: ${{ secrets.JWT_PUBLIC_KEY }}
