@@ -27,13 +27,34 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@af1da67850ed9a4cedd57bfd976089dd991e2582 # v4.0.0
 
+
+      - name: Get app version from gradle
+        run: "echo \"PROJECT_VERSION=$(./gradlew properties | grep -Po '(?<=version: ).*')\" >> $GITHUB_ENV"
+
+      - name: Show app version
+        run: echo $PROJECT_VERSION
+
+      - name: Show quarkus image tag
+        run: echo $QUARKUS_CONTAINER_IMAGE_TAG
+        env:
+          QUARKUS_CONTAINER_IMAGE_TAG: $PROJECT_VERSION-${{ github.sha }}
+
+
       - name: Build with Gradle Wrapper
         run: ./gradlew build
         env:
+          QUARKUS_CONTAINER_IMAGE_TAG: $PROJECT_VERSION-${{ github.sha }}
           SMALLRYE_JWT_SIGN_KEY: ${{ secrets.JWT_PRIVATE_KEY }}
           SMALLRYE_JWT_VERIFY_KEY: ${{ secrets.JWT_PUBLIC_KEY }}
           MP_JWT_VERIFY_PUBLICKEY: ${{ secrets.JWT_PUBLIC_KEY }}
           SMALLRYE_JWT_ENCRYPT_KEY: ${{ secrets.JWT_PUBLIC_KEY }}
+
+      - name: Upload kubernetes
+        uses: actions/upload-artifact@v4
+        with:
+          name: kubernetes.yml
+          path: build/kubernetes/kubernetes.json
+
 
     # NOTE: The Gradle Wrapper is the default and recommended way to run Gradle (https://docs.gradle.org/current/userguide/gradle_wrapper.html).
     # If your project does not have the Gradle Wrapper configured, you can use the following configuration to run Gradle with a specified version.
