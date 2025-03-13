@@ -32,6 +32,7 @@ jobs:
         env:
           SMALLRYE_JWT_SIGN_KEY: ${{ secrets.JWT_PRIVATE_KEY }}
           SMALLRYE_JWT_VERIFY_KEY: ${{ secrets.JWT_PUBLIC_KEY }}
+          MP_JWT_VERIFY_PUBLICKEY: ${{ secrets.JWT_PUBLIC_KEY }}
           SMALLRYE_JWT_ENCRYPT_KEY: ${{ secrets.JWT_PUBLIC_KEY }}
 
     # NOTE: The Gradle Wrapper is the default and recommended way to run Gradle (https://docs.gradle.org/current/userguide/gradle_wrapper.html).
