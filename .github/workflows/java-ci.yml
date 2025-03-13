@@ -35,11 +35,14 @@ jobs:
         run: echo $PROJECT_VERSION
 
       - name: Set quarkus image tag version
-        run: echo "QUARKUS_CONTAINER_IMAGE_TAG=$PROJECT_VERSION-${{ github.sha }}" >> $GITHUB_ENV
+        run: |
+          echo "QUARKUS_CONTAINER_IMAGE_TAG=$PROJECT_VERSION-${{ github.sha }}" >> $GITHUB_ENV
+          echo "QUARKUS_KUBERNETES_VERSION=$PROJECT_VERSION-${{ github.sha }}" >> $GITHUB_ENV
 
       - name: Show quarkus image tag
-        run: echo $QUARKUS_CONTAINER_IMAGE_TAG
-
+        run: |
+          echo $QUARKUS_CONTAINER_IMAGE_TAG
+          echo $QUARKUS_KUBERNETES_VERSION
 
       - name: Build with Gradle Wrapper
         run: ./gradlew build
@@ -52,8 +55,8 @@ jobs:
       - name: Upload kubernetes
         uses: actions/upload-artifact@v4
         with:
-          name: kubernetes.yml
-          path: build/kubernetes/kubernetes.json
+          name: kubernetes-config
+          path: build/kubernetes/kubernetes.yml
 
 
     # NOTE: The Gradle Wrapper is the default and recommended way to run Gradle (https://docs.gradle.org/current/userguide/gradle_wrapper.html).
