@@ -1,4 +1,5 @@
 # industrial-todos-qk
+[![Java CI with Gradle](https://github.com/UARTman/industrial-todos-qk/actions/workflows/java-ci.yml/badge.svg?event=push)](https://github.com/UARTman/industrial-todos-qk/actions/workflows/java-ci.yml)
 
 ## Running the application in dev mode
 
