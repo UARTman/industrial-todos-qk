@@ -88,11 +88,12 @@ class AuthResource {
     }
 
 
+    /* Get username of an authenticated user */
     @GET
     @Path("/username")
     @RolesAllowed("User")
     @Produces(MediaType.APPLICATION_JSON)
-    fun protected(@Context ctx: SecurityContext): UsernameData {
+    fun getUsername(@Context ctx: SecurityContext): UsernameData {
         return UsernameData(ctx.userPrincipal.name)
     }
 }

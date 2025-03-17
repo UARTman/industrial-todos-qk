@@ -73,4 +73,11 @@ The application, packaged as an _über-jar_, is now runnable using `java -jar bu
 
 ## Kubernetes deployment
 
-TODO: Document kubernetes deployment process.
+The schema for kubernetes deployment can be acquired in the `build/kubernetes/` directory after a successful build.
+
+A secret `todos-backend` must exist with values `postgres-password` (self-explanatory),
+`publicKey.pem` and `privateKey.pem` (used for JWT signing and validation).
+
+## Swagger ui in prod
+
+The production version of the app includes Swagger UI at `/q/swagger-ui`.
